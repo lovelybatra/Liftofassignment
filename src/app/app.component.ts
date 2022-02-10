@@ -64,7 +64,7 @@ getvalue(event : any)
 submitted : boolean =false
 submit()
 {
-  console.log(this.selectedanswer.length,this.questionlist.length)
+  
   if(this.selectedanswer.length>0)
   {
   if(this.questionlist.length==this.selectedanswer.length)
@@ -95,12 +95,18 @@ submit()
     
    console.log("not answered",data)
 
-alert(`Please Select the answers of ${data.length} questions before submitting`)
+
    if(data.length>0)
    {
+    alert(`Please Select the answers of ${data.length} questions before submitting`)
      data.map((x: any)=>{
        x.selectedanser='null'
      })
+   }
+   else
+   {
+    alert(`Please Select the answers of ${this.questionlist.length-this.selectedanswer.length} questions before submitting`)
+  
    }
 
    this.submitted=false
@@ -108,6 +114,8 @@ alert(`Please Select the answers of ${data.length} questions before submitting`)
   }
 }
 else{
+  alert(`Please Select the answers of ${this.questionlist.length.length} questions before submitting`)
+ 
   this.questionlist.map((question : any)=>{
     question.selectedanser="null"
   }
@@ -145,7 +153,10 @@ selectanswer(event : any,questionid : any)
 }
 else{
   data[0].selectedanser="null"
-this.questionid=questionid
+  let index = this.selectedanswer.findIndex( question => question.questionid==questionid);
+  if(index!=-1)
+  this.selectedanswer.splice(index,1)
+  this.questionid=questionid
 }
 }
 
